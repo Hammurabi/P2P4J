@@ -1,4 +1,4 @@
-package com.riverssen;
+package main.java.com.riverssen.p2p4j;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -7,8 +7,6 @@ import java.net.Socket;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Node implements Runnable {

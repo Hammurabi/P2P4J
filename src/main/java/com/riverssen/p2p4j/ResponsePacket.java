@@ -1,6 +1,4 @@
-package com.riverssen;
-
-import com.riverssen.Node;
+package main.java.com.riverssen.p2p4j;
 
 public class ResponsePacket<T, EnumR extends Enum<EnumR>> {
     private Node    issuer;

@@ -1,16 +1,9 @@
-package com.riverssen;
-
-import sun.awt.AppContext;
+package main.java.com.riverssen.p2p4j;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.channels.AsynchronousServerSocketChannel;
-import java.nio.channels.AsynchronousSocketChannel;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 public class Server implements Runnable {
     private Map<NodeID, Node>               nodes;
