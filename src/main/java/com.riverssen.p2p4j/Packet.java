@@ -1,3 +1,5 @@
+package main.java.com.riverssen.p2p4j;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;

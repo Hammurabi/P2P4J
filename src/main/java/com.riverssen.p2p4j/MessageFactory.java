@@ -1,3 +1,5 @@
+package main.java.com.riverssen.p2p4j;
+
 public abstract class MessageFactory<EPacketType extends Enum<EPacketType>, EResponse extends Enum<EResponse>> {
     private long                        serialNumber;
 
