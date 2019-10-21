@@ -1,4 +1,4 @@
-package main.java.com.riverssen.p2p4j;
+package com.riverssen.p2p4j;
 
 import java.io.IOException;
 import java.net.Socket;

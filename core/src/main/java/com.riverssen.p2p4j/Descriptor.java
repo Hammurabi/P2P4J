@@ -1,4 +1,4 @@
-package main.java.com.riverssen.p2p4j;
+package com.riverssen.p2p4j;
 
 public class Descriptor <T> {
     private T struct;
