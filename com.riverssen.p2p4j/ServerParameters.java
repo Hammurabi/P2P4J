@@ -1,5 +1,3 @@
-package main.java.com.riverssen.p2p4j;
-
 import java.util.concurrent.ExecutorService;
 
 public abstract class ServerParameters {

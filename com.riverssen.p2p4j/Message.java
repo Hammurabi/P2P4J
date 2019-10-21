@@ -1,5 +1,3 @@
-package main.java.com.riverssen.p2p4j;
-
 import java.util.concurrent.ExecutionException;
 
 public abstract class Message {

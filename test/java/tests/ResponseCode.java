@@ -1,4 +1,4 @@
-package test.java.tests;
+package tests;
 
 public enum ResponseCode {
     /**

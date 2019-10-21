@@ -1,4 +1,4 @@
-package test.java.tests;
+package tests;
 
 import main.java.com.riverssen.p2p4j.Packet;
 
