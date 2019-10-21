@@ -11,5 +11,6 @@
     <groupId>com.riverssen.p2p4j</groupId>
     <artifactId>core</artifactId>
     <version>1.0.0a</version>
+    <name>core</name>
 
 </project>
