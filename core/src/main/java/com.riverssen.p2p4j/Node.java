@@ -169,7 +169,12 @@ public class Node implements Runnable {
                 length = makeInt(data[0], data[1], data[2], data[3]);
             }
 
-            if (length > 0) {
+            if (length <= 0 || length > server.getParameters().getMaxBytesReceive())
+            {
+                nodeID.incrementSpam();
+                throw new IOException("invalid byte count.");
+            }
+            else {
                 byte data[] = new byte[length];
                 int count = 0;
                 long timeStamp = System.currentTimeMillis();
