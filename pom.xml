@@ -8,6 +8,10 @@
     <artifactId>P2P4J</artifactId>
     <version>1.0.0</version>
 
+    <modules>
+        <module>core</module>
+    </modules>
+
     <build>
         <plugins>
             <plugin>
