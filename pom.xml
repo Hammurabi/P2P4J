@@ -7,7 +7,7 @@
     <groupId>com.riverssen.p2p4j</groupId>
     <artifactId>P2P4J</artifactId>
     <version>1.0.0</version>
-    
+
     <build>
         <plugins>
             <plugin>
