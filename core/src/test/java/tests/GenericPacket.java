@@ -1,6 +1,6 @@
 package tests;
 
-import main.java.com.riverssen.p2p4j.Packet;
+import com.riverssen.p2p4j.Packet;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

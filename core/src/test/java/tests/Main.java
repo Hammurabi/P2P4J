@@ -1,6 +1,16 @@
 package tests;
 
-import main.java.com.riverssen.p2p4j.*;
+import com.riverssen.p2p4j.Message;
+import com.riverssen.p2p4j.MessageFactory;
+import com.riverssen.p2p4j.MessageFactoryException;
+import com.riverssen.p2p4j.Server;
+import com.riverssen.p2p4j.NodeID;
+import com.riverssen.p2p4j.NodeFactory;
+import com.riverssen.p2p4j.Node;
+import com.riverssen.p2p4j.ResponsePacket;
+import com.riverssen.p2p4j.ServerParameters;
+import com.riverssen.p2p4j.Descriptor;
+import com.riverssen.p2p4j.Packet;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
