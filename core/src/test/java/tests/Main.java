@@ -118,7 +118,7 @@ public class Main {
                         int size = packetData.length;
 
                         if (size < 8)
-                            return;
+                            return new byte[1];
                         long serial = buffer.getLong();
 
                         int code = Byte.toUnsignedInt(buffer.get());
@@ -171,6 +171,8 @@ public class Main {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
+                    return new byte[1];
                 }, (servr, socket) -> {
             try {
                 NodeID nodeID = new NodeIDImpl(socket.getInetAddress(), socket.getPort());
@@ -370,6 +372,11 @@ public class Main {
             dataOutputStream.write((byte) messageType);
             dataOutputStream.write((byte) responseCode);
             dataOutputStream.write(data);
+        }
+
+        @Override
+        public byte[] getHashCode() {
+            return new byte[1];
         }
     }
 

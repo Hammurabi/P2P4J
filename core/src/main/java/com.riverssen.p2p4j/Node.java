@@ -83,6 +83,22 @@ public class Node implements Runnable {
             if (packet.getSize() > server.getParameters().getMaxBytesSend())
                 return false;
 
+            /**
+             * Check that the packet has not been sent
+             * before.
+             *
+             * This is implementation specific.
+             */
+            if (nodeID.screen(packet.getHashCode()))
+                return false;
+
+            /**
+             * Cache the hash of this packet to insure
+             * that it doesn't get sent and or received
+             * again.
+             */
+            nodeID.cache(packet.getHashCode());
+
             dataOutputStream.writeInt(packet.getSize());
             packet.write(dataOutputStream);
             dataOutputStream.flush();
@@ -133,6 +149,7 @@ public class Node implements Runnable {
         socket.close();
     }
 
+    @Deprecated
     public void dropConnectionUnconditional() throws IOException {
         if (!connected.get()) return;
         connected.set(false);
@@ -210,8 +227,15 @@ public class Node implements Runnable {
                     byte[] data = iterator.next();
 
                     if (data != null && data.length > 0)
-                        server.getParameters().getMessageReceivedCallback().onEvent(server, this, data);
-                    else if (data.length == 0)
+                    {
+                        byte hashCode[] = server.getParameters().getMessageReceivedCallback().onEvent(server, this, data);
+                        if (nodeID.screen(hashCode)) {
+                            nodeID.incrementSpam();
+                        } else {
+                            nodeID.cache(hashCode);
+                        }
+                    }
+                    else if (data != null && data.length == 0)
                         nodeID.incrementSpam();
 
                     iterator.remove();

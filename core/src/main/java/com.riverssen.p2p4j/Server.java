@@ -26,10 +26,12 @@ public class Server implements Runnable {
         this.serverParameters.getThreadPool().execute(()->{
             while (serverParameters.getKeepAlive())
             {
-                try {
-                    Socket sock = socket.accept();
-                    serverParameters.getConnectionRequestCallback().onEvent(self, sock);
-                } catch (IOException e) {
+                if (getNetworkSize() < serverParameters.getMaxConnections()) {
+                    try {
+                        Socket sock = socket.accept();
+                        serverParameters.getConnectionRequestCallback().onEvent(self, sock);
+                    } catch (IOException e) {
+                    }
                 }
             }
         });
