@@ -42,4 +42,9 @@ public class GenericPacket extends Packet {
     public void write(DataOutputStream dataOutputStream) throws IOException {
         dataOutputStream.write(data);
     }
+
+    @Override
+    public byte[] getHashCode() {
+        return new byte[1];
+    }
 }
