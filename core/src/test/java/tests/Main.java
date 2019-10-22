@@ -315,6 +315,11 @@ public class Main {
             dataOutputStream.write((byte) messageType);
             dataOutputStream.write(data);
         }
+
+        @Override
+        public byte[] getHashCode() {
+            return new byte[1];
+        }
     }
 
     public static class GenericResponsePacket extends Packet {
