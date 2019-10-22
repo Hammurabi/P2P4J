@@ -92,9 +92,9 @@ public class Main {
 
                 message.send(theNode);
                 System.out.println(name + " sent " + message.getPacket().getSize());
-                ResponsePacket<String, ResponseCode> response1 = request1.<String, ResponseCode>sendGetReply(theNode, 17000);
+                ResponsePacket<String, ResponseCode> response1 = request1.<String, ResponseCode>sendGetReply(theNode, 1500);
                 System.out.println(name + " sent " + request1.getPacket().getSize() + " " + request1.getPacket().getSerialNumber());
-                ResponsePacket<Integer, ResponseCode> response2 = request2.<Integer, ResponseCode>sendGetReply(theNode, 17000);
+                ResponsePacket<Integer, ResponseCode> response2 = request2.<Integer, ResponseCode>sendGetReply(theNode, 1500);
                 System.out.println(name + " sent " + request2.getPacket().getSize() + " " + request2.getPacket().getSerialNumber());
 
                 System.out.println(name + ".. response1: " + response1);

@@ -6,11 +6,11 @@
     <parent>
         <groupId>com.riverssen.p2p4j</groupId>
         <artifactId>P2P4J</artifactId>
-        <version>1.0.0a</version>
+        <version>1.2</version>
     </parent>
     <groupId>com.riverssen.p2p4j</groupId>
     <artifactId>core</artifactId>
-    <version>1.0.0a</version>
+    <version>1.2</version>
     <name>core</name>
 
 </project>

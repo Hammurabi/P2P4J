@@ -31,7 +31,7 @@ public class Node implements Runnable {
         this.inputStream = socket.getInputStream();
         this.received = Collections.synchronizedSet(new LinkedHashSet<>());
         this.server.getParameters().getThreadPool().execute(()->{
-            while (getConnected()) {
+            while (isConnected()) {
                 try {
                     CompletableFuture<byte[]> messageReceived = waitFor();
                     if (messageReceived == null)
@@ -39,7 +39,7 @@ public class Node implements Runnable {
                     byte data[] = messageReceived.get();
                     received.add(data);
 
-                    Thread.sleep(25);
+                    Thread.sleep(5);
                 } catch (ExecutionException e) {
                 } catch (InterruptedException e) {
                 } catch (IOException e) {
@@ -47,7 +47,7 @@ public class Node implements Runnable {
             }
         });
         this.server.getParameters().getThreadPool().execute(()->{
-            while (getConnected()) {
+            while (isConnected()) {
                 synchronized (messages) {
                     Iterator<Packet> iterator = messages.iterator();
 
@@ -71,10 +71,6 @@ public class Node implements Runnable {
 
     public Socket getSocket() {
         return socket;
-    }
-
-    public boolean getConnected() {
-        return connected.get();
     }
 
     protected boolean sendMessage(Packet packet)
@@ -165,6 +161,7 @@ public class Node implements Runnable {
 
     public CompletableFuture<byte[]> waitFor() throws ExecutionException, InterruptedException, IOException {
         CompletableFuture<byte[]> result = new CompletableFuture<>();
+
         try {
             int length = 0;
             {
@@ -261,5 +258,9 @@ public class Node implements Runnable {
         }
 
         getRequests.clear();
+        try {
+            dropConnection();
+        } catch (IOException e) {
+        }
     }
 }

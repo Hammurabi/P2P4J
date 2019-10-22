@@ -126,6 +126,18 @@ public class Server implements Runnable {
                     messageIterator.remove();
                 }
             }
+
+            synchronized (nodes) {
+                Iterator< Map.Entry<NodeID, Node> > iterator = nodes.entrySet().iterator();
+
+                while (iterator.hasNext()) {
+                    Map.Entry<NodeID, Node> entry = iterator.next();
+
+                    if (!entry.getValue().isConnected()) {
+                        iterator.remove();
+                    }
+                }
+            }
         }
     }
 
