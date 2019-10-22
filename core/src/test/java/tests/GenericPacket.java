@@ -47,4 +47,9 @@ public class GenericPacket extends Packet {
     public byte[] getHashCode() {
         return new byte[1];
     }
+
+    @Override
+    public byte[] getBytes() {
+        return getBuffer().array();
+    }
 }

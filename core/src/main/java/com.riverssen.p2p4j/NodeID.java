@@ -17,6 +17,8 @@ public abstract class NodeID {
     public abstract boolean screen(byte[] object);
     public abstract void cache(byte[] object);
 
+    public abstract CryptographicScheme getScheme();
+
     @Override
     public String toString() {
         return getAddress() + ":" + getPort();

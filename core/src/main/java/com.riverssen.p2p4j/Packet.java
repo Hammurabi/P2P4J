@@ -19,4 +19,5 @@ public abstract class Packet {
     public abstract void write(DataOutputStream dataOutputStream) throws IOException;
 
     public abstract byte[] getHashCode();
+    public abstract byte[] getBytes();
 }

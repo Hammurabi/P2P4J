@@ -11,6 +11,8 @@ import com.riverssen.p2p4j.ResponsePacket;
 import com.riverssen.p2p4j.ServerParameters;
 import com.riverssen.p2p4j.Descriptor;
 import com.riverssen.p2p4j.Packet;
+import com.riverssen.p2p4j.CryptographicScheme;
+import com.riverssen.p2p4j.DefaultScheme;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -92,9 +94,9 @@ public class Main {
 
                 message.send(theNode);
                 System.out.println(name + " sent " + message.getPacket().getSize());
-                ResponsePacket<String, ResponseCode> response1 = request1.<String, ResponseCode>sendGetReply(theNode, 1500);
+                ResponsePacket<String, ResponseCode> response1 = request1.<String, ResponseCode>sendGetReply(theNode, 10000);
                 System.out.println(name + " sent " + request1.getPacket().getSize() + " " + request1.getPacket().getSerialNumber());
-                ResponsePacket<Integer, ResponseCode> response2 = request2.<Integer, ResponseCode>sendGetReply(theNode, 1500);
+                ResponsePacket<Integer, ResponseCode> response2 = request2.<Integer, ResponseCode>sendGetReply(theNode, 10000);
                 System.out.println(name + " sent " + request2.getPacket().getSize() + " " + request2.getPacket().getSerialNumber());
 
                 System.out.println(name + ".. response1: " + response1);
@@ -203,12 +205,14 @@ public class Main {
         private int spam = 0;
         private InetAddress address;
         private int port;
+        private CryptographicScheme scheme;
 
         public NodeIDImpl(InetAddress address, int port)
         {
             this.address = address;
             this.port = port;
             this.setShouldBan(false);
+            this.scheme = new DefaultScheme();
         }
 
         @Override
@@ -255,6 +259,11 @@ public class Main {
 
         @Override
         public void cache(byte[] object) {
+        }
+
+        @Override
+        public CryptographicScheme getScheme() {
+            return scheme;
         }
     }
 
@@ -320,6 +329,11 @@ public class Main {
         public byte[] getHashCode() {
             return new byte[1];
         }
+
+        @Override
+        public byte[] getBytes() {
+            return getBuffer().array();
+        }
     }
 
     public static class GenericResponsePacket extends Packet {
@@ -382,6 +396,11 @@ public class Main {
         @Override
         public byte[] getHashCode() {
             return new byte[1];
+        }
+
+        @Override
+        public byte[] getBytes() {
+            return getBuffer().array();
         }
     }
 

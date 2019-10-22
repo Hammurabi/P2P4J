@@ -79,14 +79,10 @@ public class Node implements Runnable {
             if (packet.getSize() > server.getParameters().getMaxBytesSend())
                 return false;
 
-            /**
-             * Check that the packet has not been sent
-             * before.
-             *
-             * This is implementation specific.
-             */
-            if (nodeID.screen(packet.getHashCode()))
-                return false;
+            byte encodedBytes[] = nodeID.getScheme().encrypt(packet);
+            dataOutputStream.writeInt(encodedBytes.length);
+            dataOutputStream.write(encodedBytes);
+            dataOutputStream.flush();
 
             /**
              * Cache the hash of this packet to insure
@@ -94,10 +90,6 @@ public class Node implements Runnable {
              * again.
              */
             nodeID.cache(packet.getHashCode());
-
-            dataOutputStream.writeInt(packet.getSize());
-            packet.write(dataOutputStream);
-            dataOutputStream.flush();
 
             return true;
         } catch (IOException e) {
@@ -107,7 +99,17 @@ public class Node implements Runnable {
     }
 
     public boolean send(Packet packet) {
-        if (connected.get()) return messages.add(packet);
+        if (connected.get()) {
+            /**
+             * Check that the packet has not been sent
+             * before.
+             *
+             * This is implementation specific.
+             */
+            if (nodeID.screen(packet.getHashCode()))
+                return false;
+            return messages.add(packet);
+        }
         return false;
     }
 
